@@ -11,23 +11,23 @@ import { Box, HStack } from "@chakra-ui/react";
 
 const socials = [
   {
-    // icon: faEnvelope,
+    icon: faEnvelope,
     url: "mailto: hello@example.com",
   },
   {
-    // icon: faGithub,
+    icon: faGithub,
     url: "https://github.com",
   },
   {
-    // icon: faLinkedin,
+    icon: faLinkedin,
     url: "https://www.linkedin.com",
   },
   {
-    // icon: faMedium,
+    icon: faMedium,
     url: "https://medium.com",
   },
   {
-    // icon: faStackOverflow,
+    icon: faStackOverflow,
     url: "https://stackoverflow.com",
   },
 ];
@@ -47,6 +47,24 @@ const Header = () => {
     }
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY > prevScrollY.current && !isHidden) {
+        setIsHidden(true);
+      } else if (currentScrollY < prevScrollY.current && isHidden) {
+        setIsHidden(false);
+      }
+      prevScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [isHidden]);
+
   return (
     <Box
       position="fixed"
@@ -54,7 +72,7 @@ const Header = () => {
       left={0}
       right={0}
       backgroundColor="#18181b"
-      zIndex={1} // Add z-index to keep the header visually on top
+      zIndex={1}
       transform={`translateY(${isHidden ? "-200px" : "0"})`}
       transitionProperty="transform"
       transitionDuration=".3s"
@@ -69,21 +87,21 @@ const Header = () => {
         >
           <nav>
             <HStack>
-              {
-              socials.map((social)=>
-              <a href={social.url}>
-                <FontAwesomeIcon icon={social.icon}
-                size="2x"/>
-              </a>)
-              }
+              {socials.map((social) => (
+                <a href={social.url}>
+                  <FontAwesomeIcon icon={social.icon} size="2x" />
+                </a>
+              ))}
             </HStack>
           </nav>
           <nav>
             <HStack spacing={8}>
-              {/* Add links to Projects and Contact me section */}
-              <a href="/#projects-section" 
-              onClick={handleClick("projects")}>Projects</a>
-              <a href="/#contactme-section" onClick={handleClick("contactme")}>Contact Me</a>
+              <a href="/#projects-section" onClick={handleClick("projects")}>
+                Projects
+              </a>
+              <a href="/#contactme-section" onClick={handleClick("contactme")}>
+                Contact Me
+              </a>
             </HStack>
           </nav>
         </HStack>
