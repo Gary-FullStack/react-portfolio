@@ -15,8 +15,11 @@ import {
 import * as Yup from 'yup'; 
 import FullScreenSection from "./FullScreenSection"; 
 import useSubmit from "../hooks/useSubmit"; 
-import {useAlertContext} from "../context/alertContext";  
-
+import {useAlertContext} from "../context/alertContext"; 
+ 
+/** 
+* Covers a complete form implementation using formik and yup for validation 
+*/ 
 const ContactMeSection = () => { 
  const {isLoading, response, submit} = useSubmit(); 
  const { onOpen } = useAlertContext(); 
@@ -29,7 +32,7 @@ const ContactMeSection = () => {
      comment: "", 
    }, 
    onSubmit: (values) => { 
-     submit('https://deez.nuts/contactme', values); 
+     submit('https://john.com/contactme', values); 
    }, 
    validationSchema: Yup.object({ 
      firstName: Yup.string().required("Required"), 
