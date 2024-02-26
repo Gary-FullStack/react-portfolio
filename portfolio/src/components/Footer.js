@@ -14,7 +14,7 @@ const Footer = () => {
           maxWidth="1024px"
           height={16}
         >
-          <p>Gary's Sweet Portolio • © 2024</p>
+          <p>Gary's Portolio • © 2024</p>
         </Flex>
       </footer>
     </Box>
